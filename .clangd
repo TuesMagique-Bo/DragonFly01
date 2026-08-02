@@ -1,0 +1,23 @@
+CompileFlags:
+  Add:
+    - "-Wno-unknown-attributes"
+    - "-Wno-ignored-attributes"
+    - "-Wno-gnu-zero-variadic-macro-arguments"
+    - "-Wno-unused-command-line-argument"
+    - "-Wno-gnu-statement-expression"
+    - "-Wno-language-extension-token"
+    - "--target=arm-none-eabi"
+
+Index:
+  Background: Build
+
+Diagnostics:
+  Suppress:
+    - "pp_file_not_found"
+    - "drv_unknown_argument"
+  ClangTidy:
+    Remove:
+      - "*"
+
+InlayHints:
+  Enabled: No

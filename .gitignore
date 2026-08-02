@@ -1,0 +1,32 @@
+# Keil MDK build artifacts
+MDK-ARM/DragonFly_Me/*.o
+MDK-ARM/DragonFly_Me/*.d
+MDK-ARM/DragonFly_Me/*.crf
+MDK-ARM/DragonFly_Me/*.dep
+MDK-ARM/DragonFly_Me/*.axf
+MDK-ARM/DragonFly_Me/*.htm
+MDK-ARM/DragonFly_Me/*.lnp
+MDK-ARM/DragonFly_Me/*.sct
+MDK-ARM/DragonFly_Me/*.map
+MDK-ARM/DragonFly_Me/*.iex
+MDK-ARM/DragonFly_Me/*.lst
+MDK-ARM/*.lst
+MDK-ARM/DebugConfig/
+
+# clangd cache
+.cache/
+
+# IDE / editor
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS files
+Thumbs.db
+Desktop.ini
+.DS_Store
+
+# Trae
+.trae/
