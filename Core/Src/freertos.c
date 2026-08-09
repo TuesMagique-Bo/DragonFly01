@@ -53,9 +53,9 @@
 
 /* USER CODE END Variables */
 osThreadId defaultTaskHandle;
-osThreadId ledTaskHandle;
-osThreadId commTaskHandle;
-osThreadId auxTaskHandle;
+osThreadId myTask02Handle;
+osThreadId myTask03Handle;
+osThreadId myTask04Handle;
 
 /* Private function prototypes -----------------------------------------------*/
 /* USER CODE BEGIN FunctionPrototypes */
@@ -125,20 +125,20 @@ void MX_FREERTOS_Init(void) {
 
   /* Create the thread(s) */
   /* definition and creation of defaultTask */
-  osThreadDef(ctrlTask, StartDefaultTask, osPriorityHigh, 0, 256);
-  defaultTaskHandle = osThreadCreate(osThread(ctrlTask), NULL);
+  osThreadDef(defaultTask, StartDefaultTask, osPriorityNormal, 0, 128);
+  defaultTaskHandle = osThreadCreate(osThread(defaultTask), NULL);
 
-  /* definition and creation of ledTask */
-  osThreadDef(ledTask, StartTask02, osPriorityLow, 0, 128);
-  ledTaskHandle = osThreadCreate(osThread(ledTask), NULL);
+  /* definition and creation of myTask02 */
+  osThreadDef(myTask02, StartTask02, osPriorityIdle, 0, 128);
+  myTask02Handle = osThreadCreate(osThread(myTask02), NULL);
 
-  /* definition and creation of commTask */
-  osThreadDef(commTask, StartTask03, osPriorityNormal, 0, 256);
-  commTaskHandle = osThreadCreate(osThread(commTask), NULL);
+  /* definition and creation of myTask03 */
+  osThreadDef(myTask03, StartTask03, osPriorityIdle, 0, 128);
+  myTask03Handle = osThreadCreate(osThread(myTask03), NULL);
 
-  /* definition and creation of auxTask */
-  osThreadDef(auxTask, StartTask04, osPriorityLow, 0, 128);
-  auxTaskHandle = osThreadCreate(osThread(auxTask), NULL);
+  /* definition and creation of myTask04 */
+  osThreadDef(myTask04, StartTask04, osPriorityIdle, 0, 128);
+  myTask04Handle = osThreadCreate(osThread(myTask04), NULL);
 
   /* USER CODE BEGIN RTOS_THREADS */
   /* add threads, ... */

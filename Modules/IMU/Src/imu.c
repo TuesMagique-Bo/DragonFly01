@@ -1,5 +1,5 @@
 #include "imu.h"
-
+#include "i2c.h"
 IMU_Data_t g_imuData;
 
 void IMU_Init(void)
@@ -17,6 +17,13 @@ void IMU_Init(void)
 
     /* TODO: 初始化传感器硬件（SPI/I2C） */
     /* TODO: 配置传感器寄存器、校准 */
+
+    uint8_t whoami;
+    HAL_I2C_Mem_Read(&hi2c1, 0x69 << 1, 0x75, 1, &whoami, 1, 100);
+    printf("IMU WHOAMI: 0x%02X\n", whoami);
+
+    HAL_I2C_Mem_Read(&hi2c1, 0x77 << 1, 0x0D, 1, &whoami, 1, 100);
+    printf("SPL WHOAMI: 0x%02X\n", whoami);
 }
 
 void IMU_Update(void)
