@@ -20,6 +20,7 @@
 #include "main.h"
 #include "cmsis_os.h"
 #include "i2c.h"
+#include "spi.h"
 #include "tim.h"
 #include "usart.h"
 #include "gpio.h"
@@ -32,6 +33,7 @@
 #include "imu.h"
 #include "comm.h"
 #include "control.h"
+#include "si24r1.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -99,6 +101,7 @@ int main(void)
   MX_TIM3_Init();
   MX_USART1_UART_Init();
   MX_I2C1_Init();
+  MX_SPI2_Init();
   /* USER CODE BEGIN 2 */
   System_Init();
   Motor_Init();
@@ -106,6 +109,7 @@ int main(void)
   Comm_Init();
   Control_Init();
   System_SetState(SYSTEM_STATE_STANDBY);
+  SI24R1_Init();
 
   /* USER CODE END 2 */
 

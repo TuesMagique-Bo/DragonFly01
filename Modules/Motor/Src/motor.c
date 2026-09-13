@@ -38,3 +38,9 @@ void Motor_Idle(void)
 {
     Motor_SetAllDuty(MOTOR_PWM_IDLE, MOTOR_PWM_IDLE, MOTOR_PWM_IDLE, MOTOR_PWM_IDLE);
 }
+
+uint16_t Motor_GetDuty(MotorIndex_t motor)
+{
+    if (motor >= MOTOR_MAX) return 0;
+    return (uint16_t)__HAL_TIM_GET_COMPARE(&htim3, motorChannels[motor]);
+}

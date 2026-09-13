@@ -22,5 +22,6 @@ void Motor_SetDuty(MotorIndex_t motor, uint16_t duty);
 void Motor_SetAllDuty(uint16_t duty1, uint16_t duty2, uint16_t duty3, uint16_t duty4);
 void Motor_Stop(void);
 void Motor_Idle(void);
+uint16_t Motor_GetDuty(MotorIndex_t motor);
 
 #endif /* __MOTOR_H__ */

@@ -31,6 +31,7 @@
 #include "imu.h"
 #include "comm.h"
 #include "control.h"
+#include "ANO_DT.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -206,10 +207,11 @@ void StartTask03(void const * argument)
 void StartTask04(void const * argument)
 {
   /* USER CODE BEGIN StartTask04 */
-  /* 预留：电池监测 / 状态日志 */
+  /* 匿名协议：USART1 上报姿态 / IMU / 电机 PWM，避免塞进 1ms 控制环 */
   for(;;)
   {
-    osDelay(100);
+    ANO_DT_Data_Exchange();
+    osDelay(10);
   }
   /* USER CODE END StartTask04 */
 }
