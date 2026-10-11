@@ -59,6 +59,7 @@ void Error_Handler(void);
 /* Private defines -----------------------------------------------------------*/
 #define SI24R1_IRQ_Pin GPIO_PIN_2
 #define SI24R1_IRQ_GPIO_Port GPIOB
+#define SI24R1_IRQ_EXTI_IRQn EXTI2_IRQn
 #define SI24R1_CSN_Pin GPIO_PIN_12
 #define SI24R1_CSN_GPIO_Port GPIOB
 #define SI24R1_CE_Pin GPIO_PIN_8

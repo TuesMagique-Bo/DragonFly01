@@ -162,7 +162,7 @@ void StartDefaultTask(void const * argument)
   {
     System_Update();
     IMU_Update();
-    RC_Update();        /* SI24R1_ReceivePacket → 解析 → 写 g_rcData */
+    //RC_Update();        /* SI24R1_ReceivePacket → 解析 → 写 g_rcData */
     Control_Update();
     osDelay(1);
   }
@@ -211,7 +211,7 @@ void StartTask04(void const * argument)
   /* 匿名协议：USART1 上报姿态 / IMU / 电机 PWM，避免塞进 1ms 控制环 */
   for(;;)
   {
-    ANO_DT_Data_Exchange();
+    //ANO_DT_Data_Exchange();
     osDelay(10);
   }
   /* USER CODE END StartTask04 */

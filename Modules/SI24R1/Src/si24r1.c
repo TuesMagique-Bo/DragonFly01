@@ -42,6 +42,16 @@ static uint8_t SPI_RW(uint8_t tx)
     return rx;
 }
 
+/* 十六进制打印（调试用） */
+static void PrintHex(const char *tag, const uint8_t *buf, uint8_t len)
+{
+    printf("%s (%u bytes):", tag, (unsigned)len);
+    for (uint8_t i = 0; i < len; i++) {
+        printf(" %02X", buf[i]);
+    }
+    printf("\r\n");
+}
+
 /* ─── 寄存器操作 ─── */
 
 uint8_t SI24R1_ReadReg(uint8_t reg)
@@ -200,4 +210,43 @@ uint8_t SI24R1_ReceivePacket(uint8_t *data, uint8_t *len)
 
     SI24R1_WriteReg(REG_STATUS, 0x40);
     return 1;
+}
+
+/* 在 GPIO 中断回调中处理（PB2 下降沿触发） */
+void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
+{
+    if (GPIO_Pin == SI24R1_IRQ_PIN) {
+        uint8_t data[SI24R1_PAYLOAD_WIDTH];
+        uint8_t len;
+        uint8_t status = SI24R1_ReadStatus();
+
+        if (status & 0x40) {  /* RX_DR */
+            /* 已使能动态载荷，实际长度从 R_RX_PL_CNT 读取 */
+            SI24R1_CSN_LOW();
+            len = SPI_RW(SI24R1_CMD_R_RX_PL_CNT);
+            SI24R1_CSN_HIGH();
+            if (len == 0 || len > SI24R1_PAYLOAD_WIDTH) {
+                len = SI24R1_PAYLOAD_WIDTH;
+            }
+
+            SI24R1_CSN_LOW();
+            SPI_RW(SI24R1_CMD_R_RX_PAYLOAD);
+            for (uint8_t i = 0; i < len; i++) {
+                data[i] = SPI_RW(0xFF);
+            }
+            SI24R1_CSN_HIGH();
+            SI24R1_WriteReg(SI24R1_REG_STATUS, 0x40);
+
+            PrintHex("SI24R1 RX", data, len);
+        }
+        if (status & 0x20) {  /* TX_DS */
+            SI24R1_WriteReg(SI24R1_REG_STATUS, 0x20);
+        }
+        if (status & 0x10) {  /* MAX_RT */
+            SI24R1_WriteReg(SI24R1_REG_STATUS, 0x10);
+            SI24R1_CSN_LOW();
+            SPI_RW(SI24R1_CMD_FLUSH_TX);
+            SI24R1_CSN_HIGH();
+        }
+    }
 }

@@ -30,3 +30,6 @@ Desktop.ini
 
 # Trae
 .trae/
+# Keil per-user GUI settings
+*.uvguix.*
+MDK-ARM/DragonFly_Me/*.hex

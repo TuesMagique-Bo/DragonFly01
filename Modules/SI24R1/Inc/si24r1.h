@@ -31,6 +31,32 @@
 /* 载荷宽度 */
 #define SI24R1_PAYLOAD_WIDTH  32
 
+/* 寄存器命令 */
+#define SI24R1_CMD_R_REGISTER        0x00
+#define SI24R1_CMD_W_REGISTER        0x20
+#define SI24R1_CMD_R_RX_PAYLOAD      0x61
+#define SI24R1_CMD_R_RX_PL_CNT       0x60
+#define SI24R1_CMD_W_TX_PAYLOAD      0xA0
+#define SI24R1_CMD_FLUSH_TX          0xE1
+#define SI24R1_CMD_FLUSH_RX          0xE2
+#define SI24R1_CMD_NOP               0xFF
+
+/* 寄存器地址 */
+#define SI24R1_REG_CONFIG            0x00
+#define SI24R1_REG_EN_AA             0x01
+#define SI24R1_REG_EN_RXADDR         0x02
+#define SI24R1_REG_SETUP_AW          0x03
+#define SI24R1_REG_SETUP_RETR        0x04
+#define SI24R1_REG_RF_CH             0x05
+#define SI24R1_REG_RF_SETUP          0x06
+#define SI24R1_REG_STATUS            0x07
+#define SI24R1_REG_RX_ADDR_P0        0x0A
+#define SI24R1_REG_TX_ADDR           0x10
+#define SI24R1_REG_RX_PW_P0          0x11
+#define SI24R1_REG_FIFO_STATUS       0x17
+#define SI24R1_REG_DYNPD             0x1C
+#define SI24R1_REG_FEATURE           0x1D
+
 /* 函数声明 */
 uint8_t SI24R1_Init(void);
 uint8_t SI24R1_SendPacket(uint8_t *data, uint8_t len);
